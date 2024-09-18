@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { Drink, NewDrink } from "../types";
 
+
+
 const drinks: Drink[] = [
   {
     id: 1,
@@ -85,8 +87,11 @@ router.post("/", (req, res) => {
 
   const { title, image, volume, price } = body as NewDrink;
 
-  const nextId =
-    drinks.reduce((maxId: number, drink: Drink): number => (drink.id  > maxId ? drink.id : maxId), 0) + 1;
+
+ // Use reduce() to find the highest id in the pizzas array
+ const nextId =
+ drinks.reduce((maxId, drink): number => (drink.id! > maxId ? drink.id! : maxId), 0) +
+ 1; // 0 is the initial value of maxId
 
 
   const newDrink: Drink = {
