@@ -85,20 +85,18 @@ router.post("/", (req, res) => {
     imageUrl,
   };
 
-    if(addedFilm.duration < 0 || addedFilm.budget! < 0){
+    if(addedFilm.duration <= 0 || addedFilm.budget! <= 0){
       res.json("PARAMETRES INVALIDES");
+    }else{
+      films.push(addedFilm); 
+      console.log("Film bien ajouté !");
     }
   
-  films.push(addedFilm); 
-  console.log("Film bien ajouté !");
   return res.json(addedFilm);
 
 
 
+
 });
-
-
-
-  
 
 export default router;

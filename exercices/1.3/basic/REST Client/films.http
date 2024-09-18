@@ -18,8 +18,8 @@ Content-Type: application/json
 {
   "title": "L'Énigme du Temps",
   "director": "Sophie Laurent",
-  "duration": -20,
-  "budget": 60,
+  "duration": 30,
+  "budget": 100000,
   "description": "Un voyage à travers les époques pour résoudre un mystère ancien.",
   "imageUrl": "https://example.com/image4.jpg"
 }
