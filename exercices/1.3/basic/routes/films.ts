@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Film } from "../types";
+import { Film, NewFilm } from "../types";
 
 const router = Router();
 
@@ -40,6 +40,61 @@ router.get("/:id", (req, res) => {
   if(film.budget! < 0 || film.duration < 0) res.json("NOMBRE NEGATIF EN PARAM !");
 
   res.json(film);
+});
+
+// Create a film to be added to the menu.
+router.post("/", (req, res) => {
+  const body: unknown = req.body;
+  if (
+    !body ||
+    typeof body !== "object" ||
+    !("title" in body) ||
+    !("director" in body) ||
+    !("duration" in body) ||
+    !("budget" in body) ||
+    !("description" in body) ||
+    !("imageUrl" in body) ||
+    typeof body.title !== "string" ||
+    typeof body.director !== "string" ||
+    typeof body.duration !== "number" ||
+    typeof body.budget !== "number" ||
+    typeof body.description !== "string" ||
+    typeof body.imageUrl !== "string" ||
+    !body.title.trim() ||
+    !body.director.trim() ||
+    !body.description.trim() ||
+    !body.imageUrl.trim() 
+  ) {
+    return res.sendStatus(400);
+  }
+
+  const { title, director, duration, budget, description, imageUrl } = body as NewFilm;
+
+  // Use reduce() to find the highest id in the pizzas array
+  const nextId =
+    films.reduce((maxId, film) => (film.id > maxId ? film.id : maxId), 0) +
+    1; // 0 is the initial value of maxId
+
+  const addedFilm: Film = {
+    id: nextId,
+    title,
+    director,
+    duration,
+    budget,
+    description,
+    imageUrl,
+  };
+
+    if(addedFilm.duration < 0 || addedFilm.budget! < 0){
+      res.json("PARAMETRES INVALIDES");
+    }
+  
+  films.push(addedFilm); 
+  console.log("Film bien ajouté !");
+  return res.json(addedFilm);
+
+
+
 });
 
 
