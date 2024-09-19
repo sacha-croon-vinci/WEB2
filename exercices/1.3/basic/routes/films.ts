@@ -93,10 +93,6 @@ router.post("/", (req, res) => {
     }
   
   return res.json(addedFilm);
-
-
-
-
 });
 
 export default router;
