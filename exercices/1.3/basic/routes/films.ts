@@ -95,4 +95,18 @@ router.post("/", (req, res) => {
   return res.json(addedFilm);
 });
 
+router.get("/", (req, res) => {
+  if (!req.query["minimum-duration"]) {
+    // Cannot call req.query.budget-max as "-" is an operator
+    return res.json(films);
+  }
+  const durationRequest: number = Number(req.query["minimum-duration"]);
+  const filteredFilms: Film[] = films.filter((film) => {
+    console.log(filteredFilms);
+    return (film.duration >= durationRequest);
+  });
+  return res.json(filteredFilms);
+});
+
+
 export default router;
