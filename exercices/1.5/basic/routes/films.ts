@@ -24,10 +24,7 @@ const films: Film[] = [
     }
   ];
 
-  /* GET film listing. */
-router.get("/", (_req, res) => {
-  res.json(films);
-});
+
 
 /* GET film by id with exceptions. */
 router.get("/:id", (req, res) => {
@@ -104,12 +101,11 @@ router.post("/", (req, res) => {
 
 router.get("/", (req, res) => {
   if (!req.query["minimum-duration"]) {
-    // Cannot call req.query.budget-max as "-" is an operator
+    // Cannot call req.query.minimum-duration as "-" is an operator
     return res.json(films);
   }
   const durationRequest: number = Number(req.query["minimum-duration"]);
   const filteredFilms: Film[] = films.filter((film) => {
-    console.log(filteredFilms);
     return (film.duration >= durationRequest);
   });
   return res.json(filteredFilms);
