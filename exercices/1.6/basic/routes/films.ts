@@ -118,7 +118,52 @@ router.delete("/:id", (req, res) => {
     return res.sendStatus(404);
   }
   const deletedElements = films.splice(index, 1); // splice() returns an array of the deleted elements
+  console.log(deletedElements);
   return res.json(deletedElements[0]);
+});
+
+router.patch("/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const filmIndex = films.findIndex((film) => film.id === id);
+  if (filmIndex === -1) {
+    return res.sendStatus(404);
+  }
+  const film = films[filmIndex];
+  const body: unknown = req.body;
+  if (
+    !body ||
+    typeof body !== "object" ||
+    (("title" in body) && (typeof body.title !== "string" || !body.title.trim())) ||
+    (("director" in body) && (typeof body.director !== "string" || !body.director.trim())) ||
+    (("duration" in body) && (typeof body.duration !== "number")) ||
+    (("budget" in body) && (typeof body.budget !== "number")) ||
+    (("description" in body) && (typeof body.description !== "string" || !body.description.trim())) ||
+    (("imageUrl" in body) && (typeof body.imageUrl !== "string" || !body.imageUrl.trim()))
+   
+  ) {
+    return res.sendStatus(400);
+  }
+  const { title, director, duration, budget, description, imageUrl } = body as NewFilm;
+
+  if(title){
+    film.title = title;
+  } 
+  if(director){
+    film.director = director;
+  }
+  if(duration){
+    film.duration = duration;
+  }
+  if(budget){
+    film.budget = budget;
+  }
+  if(description){
+    film.description = description;
+  }
+  if(imageUrl){
+    film.imageUrl = imageUrl;
+  }
+  return res.json(film);
 });
 
 

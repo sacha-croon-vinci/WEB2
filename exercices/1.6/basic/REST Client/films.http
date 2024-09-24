@@ -28,3 +28,12 @@ Content-Type: application/json
 ### Delete a film by id 
 DELETE {{baseUrl}}/films/3
 
+### Update the film identified by x
+PATCH {{baseUrl}}/films/2
+Content-Type: application/json
+
+{
+    "title":"Magic Green 2"
+}
+
+
