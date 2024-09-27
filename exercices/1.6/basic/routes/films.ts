@@ -166,6 +166,46 @@ router.patch("/:id", (req, res) => {
   return res.json(film);
 });
 
+router.put("/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const filmIndex = films.findIndex((film) => film.id === id);
+  if (filmIndex === -1) {
+    return res.sendStatus(404);
+  }
+  const film = films[filmIndex];
+  const body: unknown = req.body;
+  if (
+    !body ||
+    typeof body !== "object" ||
+    !("title" in body) ||
+    !("director" in body) ||
+    !("duration" in body) ||
+    !("budget" in body) ||
+    !("description" in body) ||
+    !("imageUrl" in body) ||
+    typeof body.title !== "string" ||
+    typeof body.director !== "string" ||
+    typeof body.duration !== "number" ||
+    typeof body.budget !== "number" ||
+    typeof body.description !== "string" ||
+    typeof body.imageUrl !== "string" ||
+    !body.title.trim() ||
+    !body.director.trim() ||
+    !body.description.trim() ||
+    !body.imageUrl.trim() 
+  ) {
+    return res.sendStatus(400);
+  }
+  const { title, director, duration, budget, description, imageUrl } = body as Film;
+  film.title = title;
+  film.director = director;
+  film.duration = duration;
+  film.budget = budget;
+  film.description = description;
+  film.imageUrl = imageUrl;
+  return res.json(film);
+});
+
 
 
 export default router;

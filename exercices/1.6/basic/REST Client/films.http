@@ -36,4 +36,18 @@ Content-Type: application/json
     "title":"Magic Green 2"
 }
 
+### Update OR Create the film identified 
+PUT {{baseUrl}}/films/3
+Content-Type: application/json
+
+{
+  "id": 3,
+  "title": "TEST !",
+  "director": "fdgdh",
+  "duration": 500,
+  "budget": 566,
+  "description": "tes tTTT époques pour résoudre un mystère ancien.",
+  "imageUrl": "NULL"
+}
+
 
