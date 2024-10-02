@@ -26,7 +26,7 @@ Content-Type: application/json
 DELETE {{baseUrl}}/drinks/6
 
 ### Update the drinks identified by 6
-PATCH {{baseUrl}}/drinks/4
+PATCH {{baseUrl}}/drinks/5
 Content-Type: application/json
 
 {
