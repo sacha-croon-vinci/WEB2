@@ -1,0 +1,53 @@
+######### NORMAL OPERATION  ###########
+
+### Read all films
+GET http://localhost:3000/films
+
+### Read all films with File variable
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}/films
+
+
+### Read films identified by 2
+GET {{baseUrl}}/films/2
+
+### Create a film
+POST {{baseUrl}}/films
+Content-Type: application/json
+
+{
+  "title": "L'Énigme du Temps",
+  "director": "Troubadours",
+  "duration": 30,
+  "budget": 100000,
+  "description": "Un voyage à travers les époques pour résoudre un mystère ancien.",
+  "imageUrl": "https://example.com/image4.jpg"
+}
+
+
+### Delete a film by id 
+DELETE {{baseUrl}}/films/3
+
+### Update the film identified by x
+PATCH {{baseUrl}}/films/2
+Content-Type: application/json
+
+{
+    "title":"Magic Green 2"
+}
+
+### Update OR Create the film identified 
+PUT {{baseUrl}}/films/3
+Content-Type: application/json
+
+{
+  "id": 3,
+  "title": "TEST !",
+  "director": "fdgdh",
+  "duration": 500,
+  "budget": 566,
+  "description": "tes tTTT époques pour résoudre un mystère ancien.",
+  "imageUrl": "NULL"
+}
+
+
