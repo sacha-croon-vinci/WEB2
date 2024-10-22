@@ -1,0 +1,12 @@
+.online {
+    color: green;
+}
+
+.offline {
+    color: red;
+}
+
+.Name {
+    font-size: 3em;
+    font-weight: 500;
+}
