@@ -1,9 +1,12 @@
-interface PageTitleProps {
-    title: string;
-  }
+const pageTitle = "Informations sur les films dans les cinémas";
+
+
+//interface PageTitleProps {
+  //  title: string;
+  //}
   
-  const PageTitle = (props: PageTitleProps) => {
-    return <h1>{props.title}</h1>;
+const PageTitle = () => {
+    return <h1>{pageTitle}</h1>;
   };
   
-  export default PageTitle;
+export default PageTitle;
