@@ -20,7 +20,7 @@ function App() {
       <ClickCounter 
       title="Salamanca"
       on10ClicksAction='Master of clicks !'
-      onMouseOver='Hover on mouse'
+      onMouseOver='Click on me ! XD'
       />
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more

@@ -9,8 +9,8 @@ interface ClickCounterProps {
 
 const ClickCounter = ({
     title,
-    on10ClicksAction = "Master !",
-    onMouseOver = "Click !",
+    on10ClicksAction ,
+    onMouseOver,
 }: ClickCounterProps) => {
 
     //state -etats et changements
@@ -28,14 +28,8 @@ const ClickCounter = ({
             >
             count is {count}
             </button>
-            <button>
-            {count >= 10 ? <p>{on10ClicksAction}</p>: null}
             
-
-            </button>
-
-
-
+            {count >= 10 ? <p>{on10ClicksAction}</p>: null}
         </div>
 
     )
