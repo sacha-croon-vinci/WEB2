@@ -1,11 +1,9 @@
-interface MovieProps {
-    title: string;
-    director: string;
-  }
+import { Movie } from "../../types";
+import MovieItem from "../MovieItem";
 
 interface CinemaProps {
     name: string;
-    movies: MovieProps[];
+    movies: Movie[];
   }
   
   function Cinema(props : CinemaProps) {
@@ -15,12 +13,8 @@ interface CinemaProps {
       <ul>
     
         {props.movies.map((movie) => (
-            <li key={movie.title}>
-                <strong>{movie.title}</strong> - Réalisateur : {movie.director}
-            </li>
+          <MovieItem  key={movie.title} movie={movie}/>
         ))}
-        
-        
       </ul>
     </div>
     )
