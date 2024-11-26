@@ -27,14 +27,20 @@ const Randomdog = () => {
         .catch((err) => {
             console.log("error is : ",err)
         })
+
+
+        
         
 
 
 }, [])
 
+if(!dog){
+    return <>Loading photos ...</>
+}
+
     return (
         <div className="Randomdog">
-            <p>{dog?.statut}</p>
             <img src={dog?.message} alt="random doggyy" />
         </div>
     )

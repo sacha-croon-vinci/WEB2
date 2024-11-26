@@ -9,10 +9,8 @@ function App() {
   }
 
   const [joke , setJoke] = useState<Joke | undefined>(undefined);
-
   
-
-  useEffect(() => {
+  const fetchJoke = () =>{
     fetch("https://v2.jokeapi.dev/joke/Any")
     .then((response) => {
       if(!response.ok){
@@ -28,8 +26,13 @@ function App() {
         category : data.category ?? "No categories found",
       })
     })
-      
-    
+  }
+
+  
+
+  useEffect(() => {
+    fetchJoke();
+    setInterval(fetchJoke,8000);
   }, [])
 
   if(!joke){
