@@ -9,6 +9,8 @@ interface Dog{
 const Randomdog = () => {
 
     const [dog , setDog] = useState<Dog | undefined>(undefined);
+
+    //2.14B++
     const [isHovered , setIsHovered] = useState(false);
 
     const fetchDogImage = async () => {
