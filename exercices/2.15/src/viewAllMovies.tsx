@@ -1,11 +1,13 @@
 import { Movie } from "./type";
 import MovieCard from "./components/Movie";
 
+
 interface MoviesProps {
-  movies: Movie[];
+  movies: Movie[],
+  onMovieDeleted: (movie: Movie) => void;
 }
 
-const ViewAllMovies = ({movies} : MoviesProps) => {
+const ViewAllMovies = ({movies ,onMovieDeleted} : MoviesProps) => {
 
     return (
         <div>
@@ -13,6 +15,7 @@ const ViewAllMovies = ({movies} : MoviesProps) => {
             <MovieCard 
                key={movie.title}
                movie={movie}
+               onMovieDeleted={onMovieDeleted}
             />
             ))}
         

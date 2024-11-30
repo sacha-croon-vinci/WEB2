@@ -12,7 +12,8 @@ type NewMovie = Omit<Movie, "id">;
 
 interface MovieContext {
     movies: Movie[];
-    onMovieAdded: (newMovie: Movie) => void;
+    onMovieAdded: (newMovie: Movie) => void,
+    onMovieDeleted: (movie : Movie) => void,
   }
 export type {Movie , MovieContext, NewMovie};
 

@@ -4,7 +4,7 @@ import MovieCard from "../Movie";
 
 
 const SingleMoviePage = () => {
-    const {movies} : MovieContext = useOutletContext();
+    const {movies, onMovieDeleted} : MovieContext = useOutletContext();
 
     const match = useMatch("/movie/:id");
     const movieId = Number(match?.params.id);
@@ -17,7 +17,7 @@ const SingleMoviePage = () => {
     };
 
     return (
-        <MovieCard movie={movieFound} />
+        <MovieCard movie={movieFound} onMovieDeleted={onMovieDeleted} />
     );
 
 };
