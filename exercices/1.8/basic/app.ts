@@ -6,6 +6,7 @@ import filmRouter from "./routes/films";
 
 const app = express();
 let getRequestCount: number = 0;
+let postRequestCount : number = 0;
 
 // Middleware pour enregistrer les statistiques des requêtes GET
 const requestStatsMiddleware = (
@@ -16,6 +17,10 @@ const requestStatsMiddleware = (
   if (req.method === "GET") {
     getRequestCount++;
     console.log(`GET counter: ${getRequestCount}`);
+  }
+  if (req.method === "POST") {
+    postRequestCount++;
+    console.log(`POST counter : ${postRequestCount}`)
   }
   next();
 };
