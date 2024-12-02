@@ -11,10 +11,12 @@
     "start": "node build/bin/www"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/debug": "^4.1.12",
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.7",

@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Router } from "express";
 import { PotentialUser } from "../types";
 import { login, register } from "../services/users";
 const router = Router();
 
 /* Register a user */
-router.post("/register", (req, res) => {
+router.post("/register",  async (req, res) => {
   const body: unknown = req.body;
   if (
     !body ||
@@ -21,7 +22,7 @@ router.post("/register", (req, res) => {
 
   const { username, password } = body as PotentialUser;
 
-  const authenticatedUser = register(username, password);
+  const authenticatedUser =  await register(username, password);
 
   if (!authenticatedUser) {
     return res.sendStatus(409);
@@ -30,8 +31,10 @@ router.post("/register", (req, res) => {
   return res.json(authenticatedUser);
 });
 
+
+
 /* Login a user */
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
   const body: unknown = req.body;
   if (
     !body ||
@@ -48,7 +51,7 @@ router.post("/login", (req, res) => {
 
   const { username, password } = body as PotentialUser;
 
-  const authenticatedUser = login(username, password);
+  const authenticatedUser = await login(username, password);
 
   if (!authenticatedUser) {
     return res.sendStatus(401);
@@ -56,5 +59,6 @@ router.post("/login", (req, res) => {
 
   return res.json(authenticatedUser);
 });
+
 
 export default router;
