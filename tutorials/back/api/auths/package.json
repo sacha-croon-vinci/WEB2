@@ -1,7 +1,7 @@
 {
-  "name": "auths",
+  "name": "basic-api-boilerplate",
   "version": "1.0.0",
-  "author": "sacha-croon-vinci",
+  "author": "e-Baron",
   "private": true,
   "scripts": {
     "tsc": "tsc",
@@ -11,13 +11,13 @@
     "start": "node build/bin/www"
   },
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.17",
     "@types/debug": "^4.1.12",
     "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.7",
     "@typescript-eslint/eslint-plugin": "^7.13.0",
     "@typescript-eslint/parser": "^7.13.0",
     "eslint": "^8.56.0",
