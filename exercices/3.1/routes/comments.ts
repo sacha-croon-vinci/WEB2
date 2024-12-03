@@ -1,6 +1,6 @@
 import {  Router } from "express";
 import { Comment } from "../types";
-import { createOneComment, readAllComments } from "../services/comments";
+import { createOneComment, deleteOneComment, readAllComments } from "../services/comments";
 import { containsOnlyExpectedKeys } from "../utils/validate";
 import { authorize } from "../utils/auths";
 
@@ -70,8 +70,43 @@ router.post("/", authorize,(req, res) => {
     
         return res.sendStatus(500);
       }
+});
 
+//TO DO DELETE COMMENT BY FILMID AND USERNAME
+router.delete("/film/:filmId", authorize, (req, res) => {
+    const filmId = Number(req.params.filmId);
+    
+    if (
+        isNaN(filmId) ||
+        filmId <= 0 ||
+        !("user" in req) ||
+        typeof req.user !== "object" ||
+        !req.user ||
+        !("username" in req.user) ||
+        typeof req.user.username !== "string"
+      ) {
+        return res.sendStatus(400);
+      }
+    const username = req.user.username;
+    if(!username){
+        return res.sendStatus(400);
+    }
 
+    try{
+        const commentDeleted = deleteOneComment(filmId, username);
+        return res.send(commentDeleted);
+
+    } catch ( error ){
+        if (!(error instanceof Error)) {
+            return res.sendStatus(500);
+          }
+      
+          if (error.message === "Not found") {
+            return res.sendStatus(404);
+          }
+      
+          return res.sendStatus(500);
+    }
 });
 
 
