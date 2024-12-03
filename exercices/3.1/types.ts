@@ -30,9 +30,6 @@ interface FilmToUpdate {
   imageUrl?: string;
 }
 
-
-
-
 interface Drink {
   id: number;
   title: string;
@@ -54,6 +51,11 @@ interface User {
   id: number;
   username: string;
   password: string;
+}
+interface Comment {
+  filmId : number;
+  username: string;
+  comment : string;
 }
 
 type PotentialUser = Omit<User, "id">;
@@ -79,6 +81,7 @@ export type {
   NewDrink,
   AuthenticatedUser,
   User,
+  Comment,
   PotentialUser,
   AuthenticatedRequest,
   JwtPayload,
