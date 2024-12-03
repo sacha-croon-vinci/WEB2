@@ -1,6 +1,6 @@
 import {  Router } from "express";
 import { Comment } from "../types";
-import { readAllComments } from "../services/comments";
+import { createOneComment, readAllComments } from "../services/comments";
 
 const router = Router();
 
@@ -18,6 +18,35 @@ router.get("/", (req, res) => {
     const commentsFiltered = readAllComments(filmId);
     return res.send(commentsFiltered);
 });
+
+router.post("/", (req, res) => {
+    const body: unknown = req.body;
+    if (
+        !body ||
+        typeof body !== "object" ||
+        !("comment" in body) ||
+        !("filmId" in body) ||
+        typeof body.comment !== "string" ||
+        typeof body.filmId !== "number" ||
+        !Number.isInteger(body.filmId) ||
+        body.filmId <= 0 ||
+        !body.comment.trim() ||
+        !("user" in req) ||
+        typeof req.user !== "object" ||
+        !req.user ||
+        !("username" in req.user) ||
+        typeof req.user.username !== "string"
+      ) {
+        return res.sendStatus(400);
+      }
+      if (!containsOnlyExpectedKeys(body, expectedKeys)) {
+        return res.sendStatus(400);
+      }
+
+    const comment = body as Comment;
+    createOneComment(comment);
+    return res.sendStatus(200);
+}
 
 
 
