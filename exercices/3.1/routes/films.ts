@@ -4,6 +4,7 @@ import { NewFilm } from "../types";
 import {
   readAll, readOne, createOne, deleteOne, updateOne, updateOrCreateOne
 }from "../services/films";
+import { authorize } from "../utils/auths";
 
 
 const router = Router();
@@ -20,7 +21,7 @@ router.get("/:id", (req, res) => {
 });
 
 // Create a film to be added to the menu.
-router.post("/", (req, res) => {
+router.post("/", authorize,(req, res) => {
   const body: unknown = req.body;
   if (
     !body ||
@@ -58,7 +59,7 @@ router.get("/", (req, res) => {
   return res.json(films);
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", authorize,(req, res) => {
   const id = Number(req.params.id);
   const film = deleteOne(id);
   if (!film) {
@@ -67,7 +68,7 @@ router.delete("/:id", (req, res) => {
   return res.json(film);
 });
 
-router.patch("/:id", (req, res) => {
+router.patch("/:id", authorize,(req, res) => {
   const id = Number(req.params.id);
  
   const body: unknown = req.body;
@@ -93,7 +94,7 @@ router.patch("/:id", (req, res) => {
   return res.json(updateOneFilm);
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id", authorize,(req, res) => {
   const body: unknown = req.body;
 
   if (

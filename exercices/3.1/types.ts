@@ -74,6 +74,7 @@ export type {
   PizzaToUpdate,
   Film,
   FilmToUpdate,
+  NewFilm,
   Drink,
   NewDrink,
   AuthenticatedUser,
