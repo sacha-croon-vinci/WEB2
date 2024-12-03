@@ -6,6 +6,7 @@ import pizzaRouter from "./routes/pizzas";
 import drinkRouter from "./routes/drinks";
 import filmRouter from "./routes/films";
 import authsRouter from "./routes/auths";
+import commentsRouter from "./routes/comments";
 
 
 const app = express();
@@ -53,6 +54,7 @@ app.use("/pizzas", pizzaRouter);
 app.use("/drinks", drinkRouter);
 app.use("/films",filmRouter);
 app.use("/auths", authsRouter);
+app.use("/comments", commentsRouter);
 
 
 const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {

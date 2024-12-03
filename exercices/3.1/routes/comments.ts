@@ -72,8 +72,8 @@ router.post("/", authorize,(req, res) => {
       }
 });
 
-//TO DO DELETE COMMENT BY FILMID AND USERNAME
-router.delete("/film/:filmId", authorize, (req, res) => {
+//DELETE COMMENT BY FILMID AND USERNAME
+router.delete("/films/:filmId", authorize, (req, res) => {
     const filmId = Number(req.params.filmId);
     
     if (
