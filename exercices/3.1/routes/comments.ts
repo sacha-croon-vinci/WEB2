@@ -1,6 +1,8 @@
 import {  Router } from "express";
 import { Comment } from "../types";
 import { createOneComment, readAllComments } from "../services/comments";
+import { containsOnlyExpectedKeys } from "../utils/validate";
+import { authorize } from "../utils/auths";
 
 const router = Router();
 
@@ -19,7 +21,7 @@ router.get("/", (req, res) => {
     return res.send(commentsFiltered);
 });
 
-router.post("/", (req, res) => {
+router.post("/", authorize,(req, res) => {
     const body: unknown = req.body;
     if (
         !body ||
@@ -43,24 +45,49 @@ router.post("/", (req, res) => {
         return res.sendStatus(400);
       }
 
-    const comment = body as Comment;
-    createOneComment(comment);
-    return res.sendStatus(200);
-}
+    const newComment: Comment = {
+        comment: body.comment,
+        filmId: body.filmId,
+        username: req.user.username,
+    };
+
+    try {
+        createOneComment(newComment);
+        return res.send(newComment);
+
+    } catch (error) {
+        if (!(error instanceof Error)) {
+          return res.sendStatus(500);
+        }
+    
+        if (error.message === "Not found") {
+          return res.sendStatus(404);
+        }
+    
+        if (error.message === "Conflict") {
+          return res.sendStatus(409);
+        }
+    
+        return res.sendStatus(500);
+      }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+});
 
 
 export default router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
