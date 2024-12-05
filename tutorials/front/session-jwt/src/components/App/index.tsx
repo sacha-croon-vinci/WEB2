@@ -139,11 +139,15 @@ const App = () => {
 
   const addPizza = async (newPizza: NewPizza) => {
     try {
+      if(!authenticatedUser) {
+        throw new Error("You must be admin !");
+      }
       const options = {
         method: "POST",
         body: JSON.stringify(newPizza),
         headers: {
           "Content-Type": "application/json",
+          Authorization : authenticatedUser.token
         },
       };
 
