@@ -7,6 +7,7 @@ interface PizzeriaContext {
   drinks: Drink[];
   addPizza: (newPizza: NewPizza) => Promise<void>;
   registerUser: (newUser : User) => Promise<void>;
+  loginUser: (user : User) => Promise<void>;
 }
 
 

@@ -5,6 +5,7 @@ import Footer from "../Footer";
 import Header from "../Header";
 import { Drink, NewPizza, Pizza, PizzeriaContext, User, AuthenticatedUser, MaybeAuthenticUser } from "../../types";
 import NavBar from "../Navbar";
+import { clearAuthenticatedUser, getAuthenticatedUser, storeAuthenticatedUser } from "../../utils/session";
 
 
 const drinks: Drink[] = [
@@ -58,11 +59,47 @@ const App = () => {
       const createdUser: AuthenticatedUser = await response.json();
 
       setAuthenticatedUser(createdUser);
+      storeAuthenticatedUser(createdUser);
       console.log("createdUser: ", createdUser);
     } catch (err) {
       console.error("registerUser::error: ", err);
       throw err;
     }
+  }
+
+
+  const loginUser = async (user : User) =>{
+    const options = {
+      method : "POST",
+      body : JSON.stringify(user),
+      headers : {
+        "Content-Type" : "application/json"
+      },
+    };
+
+    try{
+      const response = await fetch("api/auths/login", options);
+      
+      if(!response.ok) {
+        throw new Error(`erreur lors du fetch login ${response.status} : ${response.statusText}`)
+      }
+
+      const authenticatedUser: AuthenticatedUser = await response.json();
+      console.log("authenticated user : ",authenticatedUser);
+
+      setAuthenticatedUser(authenticatedUser);
+      storeAuthenticatedUser(authenticatedUser);
+
+    }catch (err){
+      console.error("error login : ",err);
+      throw err;
+    }
+
+  }
+
+  const clearUser = () => {
+    clearAuthenticatedUser();
+    setAuthenticatedUser(undefined);
   }
 
   const fetchPizzas = async () => {
@@ -96,6 +133,8 @@ const App = () => {
 
   useEffect(()  => {
    fetchPizzas();
+   const authenticatedUser = getAuthenticatedUser();
+   if(authenticatedUser) setAuthenticatedUser(authenticatedUser);
   }, []);
 
   const addPizza = async (newPizza: NewPizza) => {
@@ -140,6 +179,7 @@ const App = () => {
     clearActionToBePerformed,
     drinks,
     registerUser,
+    loginUser,
   };
 
   return (
@@ -150,7 +190,7 @@ const App = () => {
         handleHeaderClick={handleHeaderClick}
       />
       <main>
-        <NavBar authenticatedUser={authenticatedUser}/>
+        <NavBar authenticatedUser={authenticatedUser} clearUser={clearUser}/>
         <Outlet context={fullPizzaContext} />
       </main>
       <Footer />

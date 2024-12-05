@@ -1,5 +1,5 @@
 import { useState, SyntheticEvent } from "react";
-import "./index.css";
+import "../App/App.css";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { PizzeriaContext } from "../../types";
 
